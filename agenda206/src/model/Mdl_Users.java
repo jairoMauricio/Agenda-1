@@ -17,6 +17,7 @@ public class Mdl_Users extends Mdl_Personas{
     private String ufecharegistro;
     private String ufechamodificacion;
     private String uestado;
+    private String confirmarClave;
 
     public Mdl_Users() {
     }
@@ -96,5 +97,13 @@ public class Mdl_Users extends Mdl_Personas{
 
     public void setUestado(String uestado) {
         this.uestado = uestado;
+    }
+
+    public String getConfirmarClave() {
+        return confirmarClave;
+    }
+
+    public void setConfirmarClave(String confirmarClave) {
+        this.confirmarClave = confirmarClave;
     }
 }

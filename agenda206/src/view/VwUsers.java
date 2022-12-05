@@ -19,26 +19,26 @@ public class VwUsers extends javax.swing.JDialog {
      * Creates new form VstUsers
      */
     ArrayList<Mdl_Users> listauser = new ArrayList();
-    
+
     public VwUsers(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         llenarTablaUser();
     }
-    
-    void llenarTablaUser(){
+
+    void llenarTablaUser() {
         Ctr_usuarios cu = new Ctr_usuarios();
         listauser = cu.consultar();
         for (int posicion = 0; posicion < listauser.size(); posicion++) {
-            tbl_usuarios.setValueAt(posicion+1, posicion,0);
-            tbl_usuarios.setValueAt(listauser.get(posicion).getNombres(), posicion,1);
-            tbl_usuarios.setValueAt(listauser.get(posicion).getApellidos(), posicion,2);
-            if(listauser.get(posicion).getTipouser().equals("1")){
-               tbl_usuarios.setValueAt("Privado", posicion,3); 
-            }else{
-               tbl_usuarios.setValueAt("Público", posicion,3); 
-            }            
-            tbl_usuarios.setValueAt(listauser.get(posicion).getNombreuser(), posicion,4);
+            tbl_usuarios.setValueAt(posicion + 1, posicion, 0);
+            tbl_usuarios.setValueAt(listauser.get(posicion).getNombres(), posicion, 1);
+            tbl_usuarios.setValueAt(listauser.get(posicion).getApellidos(), posicion, 2);
+            if (listauser.get(posicion).getTipouser().equals("1")) {
+                tbl_usuarios.setValueAt("Privado", posicion, 3);
+            } else {
+                tbl_usuarios.setValueAt("Público", posicion, 3);
+            }
+            tbl_usuarios.setValueAt(listauser.get(posicion).getNombreuser(), posicion, 4);
         }
     }
 
