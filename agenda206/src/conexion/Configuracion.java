@@ -44,9 +44,9 @@ public interface Configuracion {
 //    String PASSWORD = "jaime";
 //    
     String DRIVER = "org.apache.derby.jdbc.ClientDriver";
-    String DATA_BASE = "agenda206";
+    String DATA_BASE = "Agenda";
     String CONNECTION_URL = "jdbc:derby://localhost:1527/"+DATA_BASE;    
-    String USERNAME = "jaime";
-    String PASSWORD = "jaime";
+    String USERNAME = "ADSI206";
+    String PASSWORD = "03198CAG";
 }
 
