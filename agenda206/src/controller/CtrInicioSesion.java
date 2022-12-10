@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 import model.MdlSqlUsuarios;
 import model.Mdl_Users;
 import view.VwInicioSesion;
@@ -35,13 +34,6 @@ public class CtrInicioSesion implements ActionListener {
 
         ventanaRegistrar.setVisible(true);
         vista.setVisible(false);
-
-        modelo.setNombres(ventanaRegistrar.txtNombres.getText());
-        modelo.setApellidos(ventanaRegistrar.txtApellidos.getText());
-        modelo.setTipouser(ventanaRegistrar.cbxTipoUsuario.getSelectedItem().toString());
-        modelo.setNombreuser(ventanaRegistrar.txtNombreUsuario.getText());
-        modelo.setClave(ventanaRegistrar.pwdClave.getText());
-        modelo.setConfirmarClave(ventanaRegistrar.pwdConfirmarClave.getText());
     }
 
     public void actionPerformed(ActionEvent evt) {

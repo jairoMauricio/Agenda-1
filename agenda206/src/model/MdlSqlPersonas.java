@@ -1,18 +1,25 @@
 package model;
 
 import conexion.Conexion;
+import static conexion.Conexion.getConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author User
+/*
+Creado por:
+Jhonny Castaño
+Jhon Gonzalez
+Nicolas Gutierrez
+Juan Varela
+Santiago Nieto
  */
+
 public class MdlSqlPersonas extends Conexion{
-    public boolean registrarpersonas(Mdl_Personas personas) {
+     public boolean registrarpersonas(Mdl_Personas personas) {
         PreparedStatement ps = null;
         Connection con = getConnection();
         String sql = "INSERT INTO() VALUES()";
@@ -27,5 +34,21 @@ public class MdlSqlPersonas extends Conexion{
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+
+    public int autoIncrementoPersonas() {
+        Conexion cone = new Conexion();
+        String sql = "SELECT IDPERSONA  from PERSONAS";
+        ResultSet rs = cone.consultar(sql);
+        int idPersonas = 0;
+        try {
+            while (rs.next()) {
+                idPersonas = rs.getInt("IDPERSONA");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al buscar el id de personas");
+        }
+        idPersonas++;
+        return idPersonas;
     }
 }

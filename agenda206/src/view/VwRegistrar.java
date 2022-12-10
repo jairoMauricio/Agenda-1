@@ -1,4 +1,8 @@
 package view;
+
+import controller.CtrRegistrar;
+import model.Mdl_Users;
+
 /*
 Creado por:
 Jhonny Castaño
@@ -35,7 +39,7 @@ public class VwRegistrar extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
         pwdClave = new javax.swing.JPasswordField();
         pwdConfirmarClave = new javax.swing.JPasswordField();
         jSeparator7 = new javax.swing.JSeparator();
@@ -105,11 +109,11 @@ public class VwRegistrar extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(55, 60, 70));
         jLabel8.setText("Confirmar Clave");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/buttons/registrar.jpg"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/buttons/registrar.jpg"))); // NOI18N
+        btnRegistrar.setBorder(null);
+        btnRegistrar.setBorderPainted(false);
+        btnRegistrar.setContentAreaFilled(false);
+        btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         pwdClave.setBorder(null);
 
@@ -125,7 +129,7 @@ public class VwRegistrar extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(150, 150, 150))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
@@ -193,7 +197,7 @@ public class VwRegistrar extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(pwdConfirmarClave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -242,14 +246,16 @@ public class VwRegistrar extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VwRegistrar().setVisible(true);
+                Mdl_Users modelo = new Mdl_Users();
+                VwRegistrar vista = new VwRegistrar();
+                CtrRegistrar controlador = new CtrRegistrar(vista, modelo);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnRegistrar;
     public javax.swing.JComboBox<String> cbxTipoUsuario;
-    public javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
