@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.MdlSqlUsuarios;
 import model.Mdl_Users;
 import view.VwInicioSesion;
 import view.VwRegistrar;
@@ -30,10 +29,10 @@ public class CtrInicioSesion implements ActionListener {
 
     public void registrar() {
         VwRegistrar ventanaRegistrar = new VwRegistrar();
-        MdlSqlUsuarios mdlSqlRegistrar = new MdlSqlUsuarios();
+        CtrRegistrar a = new CtrRegistrar(ventanaRegistrar, modelo);
 
-        ventanaRegistrar.setVisible(true);
-        vista.setVisible(false);
+        vista.dispose();
+        ventanaRegistrar.show();
     }
 
     public void actionPerformed(ActionEvent evt) {

@@ -3,7 +3,6 @@ package controller;
 import conexion.Conexion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 import model.MdlSqlPersonas;
 import model.MdlSqlUsuarios;
 import model.Mdl_Users;
@@ -17,7 +16,7 @@ Nicolas Gutierrez
 Juan Varela
 Santiago Nieto
  */
-public class CtrRegistrar implements ActionListener{
+public class CtrRegistrar implements ActionListener {
 
     private VwRegistrar vista;
     private Mdl_Users modelo;
@@ -30,7 +29,7 @@ public class CtrRegistrar implements ActionListener{
         this.modelo = modelo;
         this.vista.btnRegistrar.addActionListener(this);
     }
-    
+
     public void registrar() {
         modelo.setNombres(vista.txtNombres.getText());
         modelo.setApellidos(vista.txtApellidos.getText());
@@ -54,7 +53,7 @@ public class CtrRegistrar implements ActionListener{
 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == vista.btnRegistrar) {
-            
+            System.out.println("hola");
         }
 
 //        if (evt.getSource() == vista.btnRegistrar) {
