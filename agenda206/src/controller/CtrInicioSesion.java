@@ -37,11 +37,12 @@ public class CtrInicioSesion implements ActionListener {
 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == vista.btnAcceder) {
-
+            
         }
 
         if (evt.getSource() == vista.btnRegistrar) {
             registrar();
+            
         }
     }
 }

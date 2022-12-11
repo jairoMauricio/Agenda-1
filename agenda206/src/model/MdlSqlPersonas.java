@@ -1,7 +1,9 @@
 package model;
 
 import conexion.Conexion;
+import model.Mdl_Personas;
 import static conexion.Conexion.getConnection;
+import controller.CtrFechas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,9 +22,10 @@ Santiago Nieto
 
 public class MdlSqlPersonas extends Conexion{
      public boolean registrarpersonas(Mdl_Personas personas) {
+         CtrFechas fecha = new CtrFechas();
         PreparedStatement ps = null;
         Connection con = getConnection();
-        String sql = "INSERT INTO() VALUES()";
+        String sql = "INSERT INTO PERSONAS(IDPERSONA,NOMBRES,APELLIDOS,FECHA_REGISTRO,FECHA_MODIFICACION,ESTADO)VALUES(" + autoIncrementoPersonas() + ",'" + personas.getNombres() + "','" + personas.getApellidos() + "','" + personas.getEstado() + "','" + fecha.fechaHoy() + "','" + null + "')";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, personas.getIdpersona());

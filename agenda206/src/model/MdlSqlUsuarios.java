@@ -2,6 +2,7 @@ package model;
 
 import conexion.Conexion;
 import static conexion.Conexion.getConnection;
+import controller.CtrFechas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /*
 Creado por:
@@ -21,10 +23,10 @@ Santiago Nieto
 
 public class MdlSqlUsuarios extends Conexion {
     public boolean registrarUsuarios(Mdl_Users usuarios) {
+        CtrFechas fecha = new CtrFechas();
         PreparedStatement ps = null;
         Connection con = getConnection();
-        String sql = "INSERT INTO() VALUES()";
-        Date fecha = new Date();
+         String sql = "INSERT INTO USERS(IDUSER,CLAVE,TIPO_USER,NOMBRE_USER,FECHA_REGISTRO,FECHA_MODIFICACION,ESTADO,PERSONA)VALUES(" + autoIncrementoUsuarios() + ",'" + usuarios.getClave() + "','" + usuarios.getTipouser() + "','" + usuarios.getNombreuser() + "','" + fecha.fechaHoy() + "','" + null + "','" + usuarios.getUestado() + "'," + autoIncrementoUsuarios() + ")";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, usuarios.getIduser());
