@@ -5,22 +5,81 @@
  */
 package view;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import controller.Ctr_citas;
 /**
  *
  * @author scorpion
  */
-public class VwMenu extends javax.swing.JFrame {
+public class VwMenu extends javax.swing.JFrame implements Runnable{
+    String hora, minutos, segundos, horaMenu;
+    Thread hilo01;
+    Thread hilo02;
+    Ctr_citas cita = new Ctr_citas();
 
     /**
      * Creates new form VwMenu
      */
     public VwMenu() {
         initComponents();
+        lbl_fecha.setText(fecha());
+        hilo01 = new Thread(this);
+        hilo01.start();
+        hilo02 = new Thread(this);
+        hilo02.start();
     }
-    
+    //En este método nos calcula la hora actual
+    public void hora(){
+        Calendar calendario = new GregorianCalendar();
+        Date horaActual = new Date();
+        
+        calendario.setTime(horaActual);
+        hora = calendario.get(Calendar.HOUR_OF_DAY) > 9? "" + calendario.get(Calendar.HOUR_OF_DAY): "0" + calendario.get(Calendar.HOUR_OF_DAY);
+        minutos = calendario.get(Calendar.MINUTE) > 9? "" + calendario.get(Calendar.MINUTE): "0" + calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND) > 9? "" + calendario.get(Calendar.SECOND): "0" + calendario.get(Calendar.SECOND);
+    }
+    //En este método run se corre un hilo que se va a ejecutar todo el tiempo que esté ejecutado el código y me va a estar actualizando la hora con ayuda del método hora()
+    @Override 
+    public void run(){  
+        Thread current = Thread.currentThread();
+        while(current == hilo01){
+            hora();
+            lbl_hora.setText(hora+":"+minutos+":"+segundos);
+            horaMenu = hora+":"+minutos+":"+segundos;
+            
+        }
+        alertaFecha();
+    }
+    //Este método me ayuda a saber la fecha
+    private static String fecha(){
+        Date fecha = new Date();
+        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/YYYY");
+        return formatofecha.format(fecha);
+    }
+    //Este método abre usuarios
     void openUsers(){
         VwUsers vu=new VwUsers(this, true);
         vu.setVisible(true);
+    }
+    //Este método me abrirá la alerta
+    void openAlerta(){
+        VwAlerta dlgAlerta = new VwAlerta(this, true);
+        dlgAlerta.setVisible(true);
+    }
+    //En este método se compara la hora y fecha actual con los campos("FECHA_CITA" y "HORA_CITA") de las columnas de cita
+    private void alertaFecha(){
+        Thread current02 = Thread.currentThread();
+        VwAlerta alerta = new VwAlerta(this, true); 
+        while(current02 == hilo02){
+            cita.consultarCita(horaMenu, fecha());
+            if(fecha().equals(cita.objCita.getFechaCita()) && horaMenu.equals(cita.objCita.getHoraCita())){
+//                alerta.setTextos(String.valueOf(cita.objCita.getIdCita()), cita.objCita.getTitulo(), cita.objCita.getDescripcion());
+                openAlerta();
+            }
+        }
     }
     
 
@@ -34,6 +93,10 @@ public class VwMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         pnl_body = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lbl_fecha = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lbl_hora = new javax.swing.JLabel();
         pnl_footer = new javax.swing.JPanel();
         mbr_principal = new javax.swing.JMenuBar();
         mn_users = new javax.swing.JMenu();
@@ -44,15 +107,45 @@ public class VwMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setText("Fecha:");
+
+        lbl_fecha.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lbl_fecha.setText("dd/mm/yyyy");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel3.setText("Hora:");
+
+        lbl_hora.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lbl_hora.setText("00:00:00");
+
         javax.swing.GroupLayout pnl_bodyLayout = new javax.swing.GroupLayout(pnl_body);
         pnl_body.setLayout(pnl_bodyLayout);
         pnl_bodyLayout.setHorizontalGroup(
             pnl_bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_bodyLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnl_bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addGap(31, 31, 31)
+                .addGroup(pnl_bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_hora)
+                    .addComponent(lbl_fecha))
+                .addGap(79, 79, 79))
         );
         pnl_bodyLayout.setVerticalGroup(
             pnl_bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGroup(pnl_bodyLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(pnl_bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lbl_fecha))
+                .addGap(35, 35, 35)
+                .addGroup(pnl_bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lbl_hora))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnl_footerLayout = new javax.swing.GroupLayout(pnl_footer);
@@ -149,9 +242,13 @@ public class VwMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JLabel lbl_fecha;
+    private javax.swing.JLabel lbl_hora;
     private javax.swing.JMenuBar mbr_principal;
     private javax.swing.JMenu mn_users;
     private javax.swing.JMenuItem mnt_form_user;
