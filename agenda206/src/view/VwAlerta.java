@@ -116,6 +116,7 @@ public class VwAlerta extends java.awt.Dialog {
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         setVisible(false);
         dispose();
+        System.out.println("PRUEBA COMMIT");
     }//GEN-LAST:event_closeDialog
 
     private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
